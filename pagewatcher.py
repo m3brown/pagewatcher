@@ -22,19 +22,16 @@ def pagewatcher():
     mydivs = soup.findAll("div", {"class": "panel-success"})
 
     if len(mydivs) > 0:
-        messages = list(create_emails())
-        to_send = PMBatchMail(messages=messages)
-        to_send.send(test=False)
+        send_emails()
         return "GOT RESULTS!!"
     else:
         return "NO RESULTS :("
 
 
-def create_emails():
+def send_emails():
     for email in ['test@gmail.com', 'test2@gmail.com']:
-        yield PMMail(api_key=os.environ.get('POSTMARK_API_TOKEN'),
-                     subject="The VA Bar Results have been released!!",
-                     sender=POSTMARK_SENDER_EMAIL,
-                     to=email,
-                     text_body="Click here to see the bar results: %s" % URL,
-                     tag="bar-results")
+        PMMail(api_key=os.environ.get('POSTMARK_API_TOKEN'),
+               subject="The VA Bar Results have been released!!",
+               sender=POSTMARK_SENDER_EMAIL,
+               to=email,
+               text_body="Click here to see the bar results: %s" % URL).send()
