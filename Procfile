@@ -1,1 +1,1 @@
-web: gunicorn pagewatcher:app --log-file -
+web: gunicorn pagewatcher.wsgi --log-file -

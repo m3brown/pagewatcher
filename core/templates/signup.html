@@ -1,0 +1,32 @@
+{% extends 'bootstrap3/bootstrap3.html' %}
+{% load bootstrap3 %}
+
+{% block bootstrap3_title %}{% block title %}Signup for notifications{% endblock %}{% endblock %}
+
+
+{% block bootstrap3_content %}
+<html>
+  <body>
+    <form action="/" method="post" class="form" style="padding: 5% 25% 5% 25%">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "star" %} Submit
+            </button>
+        {% endbuttons %}
+    </form>
+
+
+    <table class="table">
+        {% for watch in watchlist %}
+        <tr>
+            <td>{{ watch.email }}</td>
+            <td>{{ watch.page.title }}</td>
+        </tr>
+        {% endfor %}
+	</table>
+
+  </body>
+</html>
+{% endblock %}
