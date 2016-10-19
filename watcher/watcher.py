@@ -23,7 +23,8 @@ def cron():
 def grep_page(page, watches):
     logger.info("Beginning query of %s" % page.url)
 
-    r = requests.get(page.url)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    r = requests.get(page.url, headers=headers)
     soup = BeautifulSoup(r.text, 'html.parser')
 
     mydivs = soup.findAll("div", {"class": "panel-success"})
