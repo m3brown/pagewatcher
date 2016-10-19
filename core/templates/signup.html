@@ -19,12 +19,18 @@
 
 
     <table class="table">
-        {% for watch in watchlist %}
+        <thead>
+            <td>Page</td>
+            <td>Subscribers</td>
+        </thead>
+        <tbody>
+        {% for key, value in watchlist.items %}
         <tr>
-            <td>{{ watch.email }}</td>
-            <td>{{ watch.page.title }}</td>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
         </tr>
         {% endfor %}
+        </tbody>
 	</table>
 
   </body>

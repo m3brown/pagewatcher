@@ -14,5 +14,11 @@ def signup(request):
         form = WatchForm()
 
     watchlist = Watch.objects.filter(triggered=False)
+    grouped_watchlist = {}
+    for watcher in watchlist:
+        if watcher.page.title not in grouped_watchlist.keys():
+            grouped_watchlist[watcher.page.title] = 1
+        else:
+            grouped_watchlist[watcher.page.title] += 1
 
-    return render(request, 'signup.html', {'form': form, 'watchlist': watchlist}) 
+    return render(request, 'signup.html', {'form': form, 'watchlist': grouped_watchlist}) 
